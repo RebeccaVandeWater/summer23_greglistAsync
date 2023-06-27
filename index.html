@@ -33,6 +33,7 @@
           <!-- NAVLINKS -->
           <a href="#/about" class="nav-link">About</a>
           <a href="#/cars" class="nav-link">Cars</a>
+          <a href="#/houses" class="nav-link">Houses</a>
         </div>
       </div>
       <div class="flex-grow-1 justify-content-end align-items-center d-flex" id="authstate"></div>
@@ -108,6 +109,84 @@
 
         </div>
       </div> -->
+      <!-- <div class="container-fluid">
+        <section class="row">
+          <div class="col-12 d-flex mt-3">
+
+            <h1 class="mx-4">Houses</h1>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#houseModal">
+              Create House
+            </button>
+
+            <div class="modal fade" id="houseModal" tabindex="-1" aria-labelledby="houseModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="houseModalLabel">Create a House</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form onsubmit="app.HousesController.createHouse(event)">
+
+                      <div>
+                        <label for="houseImg">House Image</label>
+                        <input type="url" name="imgUrl" id="houseImg">
+                      </div>
+
+                      <div>
+                        <label for="houseYear">Year</label>
+                        <input type="number" name="year" id="houseYear" min="1900" max="2024" required>
+                      </div>
+
+                      <div>
+                        <label for="housePrice">Price</label>
+                        <input type="number" name="price" id="housePrice" min="1" max="2000000" required>
+                      </div>
+
+                      <div>
+                        <label for="houseBedrooms">Bedrooms</label>
+                        <input type="number" id="houseBedrooms" name="bedrooms" min="1" max="15" required>
+                      </div>
+
+                      <div>
+                        <label for="houseBathrooms">Bathrooms</label>
+                        <input type="number" id="houseBathrooms" name="bathrooms" min=".5" max="15" step=".5" required>
+                      </div>
+
+                      <div>
+                        <label for="houseLevels">Levels</label>
+                        <input type="number" id="houseLevels" name="levels" min="1" max="5" required>
+                      </div>
+
+                      <div>
+                        <label for="houseDescription">Description</label>
+                        <textarea name="description" id="houseDescription" cols="30" rows="10"></textarea>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <section class="row" id="houseList">
+
+        </section>
+      </div> -->
+
+
+
     </section>
 
 

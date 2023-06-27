@@ -12,6 +12,8 @@ class CarsService {
     const builtCars = res.data.map(carPojo => new Car(carPojo))
 
     AppState.cars = builtCars
+
+    console.log("cars in the appstate", AppState.cars)
   }
 
   async createCar(carData) {
