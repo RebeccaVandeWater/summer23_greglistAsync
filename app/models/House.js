@@ -52,8 +52,10 @@ export class House {
                         <span>${this.creatorName}</span>
                     </div>
 
+                    <div class="d-flex">
                     ${this.ComputeDeleteButton}
-
+                    ${this.ComputeEditButton}
+                    </div>
                 </div>
             </section>
         </div>
@@ -66,8 +68,21 @@ export class House {
         }
         return `
         <div>
-            <button onclick="app.HousesController.deleteHouse('${this.id}')" class="btn btn-danger">
-            Delete House
+            <button onclick="app.HousesController.deleteHouse('${this.id}')" class="btn btn-danger m-2">
+            Sell House
+            </button>
+        </div>
+        `
+    }
+
+    get ComputeEditButton() {
+        if (!AppState.account || AppState.account.id != this.creatorId) {
+            return ''
+        }
+        return `
+        <div>
+            <button onclick="app.HousesController.drawEditForm('${this.id}')" class="btn btn-info m-2">
+            Edit House
             </button>
         </div>
         `
@@ -110,6 +125,55 @@ export class House {
                 <div>
                 <label for="houseDescription">Description</label>
                 <textarea name="description" id="houseDescription" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+                </div>
+            </form>
+        `
+    }
+
+    get EditHouseForm() {
+        return `
+        <form onsubmit="app.HousesController.editHouse(event, '${this.id}')">
+
+                <div>
+                <label for="houseImg">House Image</label>
+                <input type="url" name="imgUrl" id="houseImg" value="${this.imgUrl}">
+                </div>
+
+                <div>
+                <label for="houseYear">Year</label>
+                <input type="number" name="year" id="houseYear" min="1900" max="2024" required value="${this.year}">
+                </div>
+
+                <div>
+                <label for="housePrice">Price</label>
+                <input type="number" name="price" id="housePrice" min="1" max="2000000" required value="${this.price}">
+                </div>
+
+                <div>
+                <label for="houseBedrooms">Bedrooms</label>
+                <input type="number" id="houseBedrooms" name="bedrooms" min="1" max="15" required value="${this.bedrooms}">
+                </div>
+
+                <div>
+                <label for="houseBathrooms">Bathrooms</label>
+                <input type="number" id="houseBathrooms" name="bathrooms" min=".5" max="15" step=".5" required value="${this.bathrooms}">
+                </div>
+
+                <div>
+                <label for="houseLevels">Levels</label>
+                <input type="number" id="houseLevels" name="levels" min="1" max="5" required value="${this.levels}">
+                </div>
+
+                <div>
+                <label for="houseDescription">Description</label>
+                <textarea name="description" id="houseDescription" cols="30" rows="10">${this.description}</textarea>
                 </div>
 
                 <div class="modal-footer">

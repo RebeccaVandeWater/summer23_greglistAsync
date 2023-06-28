@@ -45,6 +45,9 @@ export class HousesController {
             const formData = getFormData(form)
 
             await housesService.createHouse(formData)
+
+            // @ts-ignore
+            bootstrap.Modal.getOrCreateInstance('#houseModal').hide()
         } catch (error) {
             console.log(error)
             Pop.error(error.message)
@@ -67,7 +70,38 @@ export class HousesController {
         }
     }
 
+    async editHouse(event, houseId) {
+        try {
+            event.preventDefault()
+
+            const form = event.target
+
+            const formData = getFormData(form)
+
+            await housesService.editHouse(formData, houseId)
+
+            // @ts-ignore
+            bootstrap.Modal.getOrCreateInstance('#houseModal').hide()
+
+        } catch (error) {
+            console.log(error);
+            Pop.error(error.message)
+        }
+    }
+
     drawCreateForm() {
         setHTML('form-section', House.CreateHouseForm)
+    }
+
+    drawEditForm(houseId) {
+        const foundHouse = AppState.houses.find(h => h.id == houseId)
+
+        const houseForm = document.getElementById('form-section')
+
+        setHTML('form-section', foundHouse.EditHouseForm)
+
+        // @ts-ignore
+        bootstrap.Modal.getOrCreateInstance('#houseModal').show()
+
     }
 }

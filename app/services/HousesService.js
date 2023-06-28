@@ -6,17 +6,16 @@ import { api } from "./AxiosService.js"
 
 class HousesService {
 
-
     async getHouses() {
         const res = await api.get('api/houses')
 
-        console.log("got houses from the API?", res.data)
+        // console.log("got houses from the API?", res.data)
 
         const houses = res.data.map(pojo => new House(pojo))
 
         AppState.houses = houses
 
-        console.log("Houses in the AppState", AppState.houses)
+        // console.log("Houses in the AppState", AppState.houses)
     }
 
     async createHouse(formData) {
@@ -44,6 +43,26 @@ class HousesService {
         }
 
         AppState.houses.splice(houseIndex, 1)
+
+        AppState.emit('houses')
+    }
+
+    async editHouse(formData, houseId) {
+        console.log(`This is the form data ${formData} and houseId ${houseId}`)
+
+        const res = await api.put(`api/houses/${houseId}`, formData)
+
+        console.log("Editted house", res.data)
+
+        const updatedHouse = new House(res.data)
+
+        const oldHouse = AppState.houses.findIndex(h => h.id == houseId)
+
+        if (oldHouse < 0) {
+            throw new Error(`No house found at ${oldHouse}`)
+        }
+
+        AppState.houses.splice(oldHouse, 1, updatedHouse)
 
         AppState.emit('houses')
     }
